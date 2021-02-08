@@ -30,10 +30,12 @@ async function boostrap() {
         app.use(cors());
 
         routes(app);
-    }catch (e){
+    } catch (e) {
         console.error(`Error in server : ${e.toString()}`);
         console.log(e)
     }
 }
 
 boostrap().then();
+// exporting our express server as module
+module.exports = app;

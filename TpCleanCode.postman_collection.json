@@ -178,7 +178,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"login\": \"testAdmin\",\n    \"role\":\"LIBRARIAN\"\n}",
+          "raw": "{\n    \"login\": \"admin\",\n    \"role\":\"LIBRARIAN\"\n}",
           "options": {
             "raw": {
               "language": "json"

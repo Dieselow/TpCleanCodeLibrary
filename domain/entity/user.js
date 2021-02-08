@@ -1,4 +1,4 @@
-import DefaultEntity from './defaultEntity'
+const DefaultEntity = require('./defaultEntity');
 
 class User extends DefaultEntity {
     static LibrarianRole = 'Librarian';

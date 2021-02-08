@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-import UserClass from '../domain/entity/user';
+const UserClass = require('../domain/entity/user');
 
 const UserSchema = mongoose.Schema({
     login: {
@@ -13,7 +13,7 @@ const UserSchema = mongoose.Schema({
         default: UserClass.UserRole
     },
     borrowedBooks: [{
-        type: Schema.Types.ObjectId, ref: "Book"
+        type: mongoose.Schema.Types.ObjectId, ref: "Book"
     }],
     required: false
 }, {timestamps: true});
@@ -24,4 +24,4 @@ UserSchema.index({borrowedBooks: 1});
 
 UserSchema.loadClass(UserClass);
 
-export default mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

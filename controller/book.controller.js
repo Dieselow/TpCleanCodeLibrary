@@ -1,4 +1,4 @@
-const BookSchema = require("../models/books");
+const BookSchema = require("../models").Books;
 const BookModel = require("../domain/entity/book");
 
 const Repository = require('../infra/database/mongooseRepository');

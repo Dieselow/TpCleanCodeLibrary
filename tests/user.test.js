@@ -10,14 +10,12 @@ const Book = require('../models/books');
 describe('POST user and books ', () => {
     after((done) => {
         User.findOneAndRemove({login: "test"}, (err) => {
-            done();
         });
         User.findOneAndRemove({login: "testAdmin"}, (err) => {
-            done();
         });
         Book.findOneAndRemove({title: "test"}, (err) => {
-            done();
         });
+        done();
     });
     it('should create a user', (done) => {
         chai.request(server)

@@ -1,8 +1,8 @@
 import DefaultEntity from './defaultEntity'
 
 class User extends DefaultEntity {
-    UserRole = 'User';
-    LibrarianRole = 'Librarian';
+    static LibrarianRole = 'Librarian';
+    static UserRole = 'USER';
 
     constructor(login, {role = 'User'} = {}, borrowedBooks) {
         super()
@@ -12,10 +12,12 @@ class User extends DefaultEntity {
     }
 
     canBorrowBook() {
-        return this.borrowedBooks.length < 4 && this.role === this.UserRole;
+        return this.borrowedBooks.length < 4 && this.role === User.UserRole;
     }
 
     canReferenceBooks() {
-        return this.role === this.LibrarianRole;
+        return this.role === User.LibrarianRole;
     }
 }
+
+module.exports = User;

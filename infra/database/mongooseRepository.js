@@ -1,6 +1,6 @@
 class MongooseRepository {
-    constructor({Model}) {
-        this.collection = Model;
+    constructor(Schema) {
+        this.collection = Schema;
     }
 
     async count() {
@@ -54,3 +54,5 @@ class MongooseRepository {
         return result.exec();
     }
 }
+
+module.exports = MongooseRepository;

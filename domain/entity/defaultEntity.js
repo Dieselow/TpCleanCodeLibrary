@@ -24,3 +24,5 @@ class DefaultEntity {
         return this.id;
     }
 }
+
+module.exports = DefaultEntity;

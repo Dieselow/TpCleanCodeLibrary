@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import BookClass from '../domain/entity/book';
+const mongoose = require('mongoose');
+const BookClass = require('../domain/entity/book');
 
 const BookSchema = mongoose.Schema({
     title: {
@@ -24,4 +24,4 @@ BookSchema.index({dateBorrowed: 1})
 
 BookSchema.loadClass(BookClass);
 
-export default mongoose.Model('Book', BookSchema);
+module.exports = mongoose.model('Book', BookSchema);

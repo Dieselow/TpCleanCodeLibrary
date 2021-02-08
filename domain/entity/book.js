@@ -1,4 +1,4 @@
-import DefaultEntity from './defaultEntity';
+const DefaultEntity = require('./defaultEntity');
 
 class Book extends DefaultEntity {
     constructor(title, authorName) {
@@ -7,3 +7,5 @@ class Book extends DefaultEntity {
         this.authorName = authorName;
     }
 }
+
+module.exports = Book;

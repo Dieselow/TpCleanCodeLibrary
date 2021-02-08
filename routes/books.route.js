@@ -30,11 +30,28 @@ module.exports = function (app) {
             if (request.body.bookId) {
                 let user = await UserController.getUser(request.user);
                 let book = await BookController.getBook(request.body.bookId);
-                let result = await UserController.borrowBook(user,book);
-                if(result){
+                let result = await UserController.borrowBook(user, book);
+                if (result) {
                     return response.status(200).json(`You borrowed the book ${book.title} from ${book.authorName}`)
                 }
                 return response.status(400).json(`you've reached you book limit !`)
+            }
+            return response.status(401).json('please specify a book')
+        } catch (e) {
+            response.status(500).json(`Error while borrowing book ${e.message}`);
+        }
+    });
+
+    app.post("/return/book", userMiddleware.userAuth(), bodyParser.json(), async (request, response) => {
+        try {
+            if (request.body.bookId) {
+                let user = await UserController.getUser(request.user);
+                let book = await BookController.getBook(request.body.bookId);
+                let result = await UserController.returnBook(user, book);
+                if (result) {
+                    return response.status(200).json(`You return the book ${book.title} from ${book.authorName}`)
+                }
+                return response.status(400).json(`you don't have any book to return !`)
             }
             return response.status(401).json('please specify a book')
         } catch (e) {

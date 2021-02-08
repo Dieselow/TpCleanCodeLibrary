@@ -32,7 +32,7 @@ class UserController {
     }
 
     async returnBook(user, book) {
-        if(user.borrowedBooks !== null && user.borrowedBooks.length > 0){
+        if (user.borrowedBooks !== null && user.borrowedBooks.length > 0) {
             user.borrowedBooks.pull(book._id);
             book.dateBorrowed = null
             await this.userRepository.update(user._id, user);

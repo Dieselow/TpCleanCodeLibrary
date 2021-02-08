@@ -12,7 +12,7 @@ class User extends DefaultEntity {
     }
 
     canBorrowBook() {
-        if(this.borrowedBooks === null){
+        if (this.borrowedBooks === null) {
             return true;
         }
         return this.borrowedBooks.length < 4 && this.role === User.UserRole;

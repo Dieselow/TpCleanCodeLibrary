@@ -7,7 +7,7 @@ class MongooseRepository {
         return this.collection.estimatedDocumentCount();
     }
 
-    async find(query = {}, {multiple = true, count, populate,paths} = {}) {
+    async find(query = {}, {multiple = true, count, populate, paths} = {}) {
         const results = multiple ? this.collection.find(query) : this.collection.findOne(query);
 
         if (count) {

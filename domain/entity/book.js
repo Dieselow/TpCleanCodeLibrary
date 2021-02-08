@@ -6,6 +6,10 @@ class Book extends DefaultEntity {
         this.title = title;
         this.authorName = authorName;
     }
+
+    canBeBorrowed() {
+        return this.dateBorrowed === null
+    }
 }
 
 module.exports = Book;

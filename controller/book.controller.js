@@ -12,6 +12,10 @@ class BookController {
         return await this.bookRepository.find();
     }
 
+    async getBook(bookId) {
+        return await this.bookRepository.findById(bookId);
+    }
+
     /**
      *
      * @param {BookModel} bookModel

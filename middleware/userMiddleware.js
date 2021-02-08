@@ -1,12 +1,7 @@
-const Repository = require('../infra/database/mongooseRepository');
-const UserSchema = require('../models/index').Users;
+const UserController = require('../controller').UserController;
 const UserClass = require('../domain/entity/user');
 
 class UserMiddleware {
-
-    constructor() {
-        this.userRepository = new Repository(UserSchema);
-    }
 
     static librarianAuth() {
         return async function (request, response, next) {
@@ -15,7 +10,8 @@ class UserMiddleware {
                 response.status(401).end();
                 return;
             }
-            const user = await this.userRepository.find({login: login});
+            const user = await UserController.getUser({login: login});
+            console.log(user);
             if (!user || user.role !== UserClass.LibrarianRole) {
                 response.status(403).end()
                 return;
@@ -34,7 +30,7 @@ class UserMiddleware {
                 response.status(401).end();
                 return;
             }
-            const user = await this.userRepository.find({login: login});
+            const user = await UserController.getUser({login: login});
             if (!user || user.role !== UserClass.UserRole) {
                 response.status(403).end()
                 return;

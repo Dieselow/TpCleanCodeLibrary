@@ -1,6 +1,7 @@
 const BookController = require("../controller").BookController;
 const Book = require("../domain/entity/book");
 const bodyParser = require("body-parser");
+const userMiddleware = require("../middleware").UserMiddleware;
 module.exports = function (app) {
     app.get('/books', async (request, response) => {
         try {
@@ -11,7 +12,7 @@ module.exports = function (app) {
         }
     });
 
-    app.post("/books", bodyParser.json(), async (request, response) => {
+    app.post("/books", userMiddleware.librarianAuth(), bodyParser.json(), async (request, response) => {
         try {
             if (request.body.title && request.body.author) {
                 let book = await BookController.createBook(new Book(request.body.title, request.body.author));

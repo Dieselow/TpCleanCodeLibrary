@@ -11,7 +11,6 @@ class UserMiddleware {
                 return;
             }
             const user = await UserController.getUser({login: login});
-            console.log(user);
             if (!user || user.role !== UserClass.LibrarianRole) {
                 response.status(403).end()
                 return;

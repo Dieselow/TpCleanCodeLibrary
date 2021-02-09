@@ -7,16 +7,13 @@ class MongooseRepository {
         return this.collection.estimatedDocumentCount();
     }
 
-    async find(query = {}, {multiple = true, count, populate, paths} = {}) {
+    async find(query = {}, {multiple = true, populate, paths} = {}) {
         const results = multiple ? this.collection.find(query) : this.collection.findOne(query);
 
-        if (count) {
-            return results.countDocuments().exec();
-        } else if (populate) {
+        if (populate) {
             return results.populate(paths).exec()
-        } else {
-            return results.exec();
         }
+        return results.exec();
     }
 
     async create(body) {
@@ -33,23 +30,20 @@ class MongooseRepository {
         return reloadedDocument.remove();
     }
 
-    async reload(document, {paths, populate, lean} = {}) {
-        if (!paths && !populate && !lean instanceof this.collection) {
+    async reload(document, {paths, populate} = {}) {
+        if (!paths && !populate instanceof this.collection) {
             return document;
         }
         return (typeof document._id == 'undefined') ? this.findById(document._id, {
             populate,
-            lean,
             paths
-        }) : this.findById(document, {populate, lean, paths});
+        }) : this.findById(document, {populate, paths});
     }
 
-    async findById(_id, {populate, lean, paths} = {}) {
+    async findById(_id, {populate, paths} = {}) {
         const result = this.collection.findById(_id);
         if (populate) {
             return result.populate(paths).exec();
-        } else if (lean) {
-            return result.lean().exec();
         }
         return result.exec();
     }
